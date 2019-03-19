@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-
+import "../imports/api/points.js";
 import "../imports/api/drawings.js";
 
 Meteor.startup(() => {});

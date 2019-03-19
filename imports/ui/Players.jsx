@@ -5,16 +5,25 @@ import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
+// import { Status } from "../api/points.js";
 
 class Players extends Component {
   findPlayer(event) {
     //TODO
+    Meteor.call("user.readyPlay", (err, res) => {
+      if (err) {
+        alert("There was error , check the console");
+        console.log(err);
+        return;
+      }
+
+      console.log("change user status", res);
+    });
     event.preventDefault();
     console.log("button Clicked" + JSON.stringify(Meteor.user()));
   }
 
   render() {
-    console.log(this.props.points);
     return (
       <div>
         <div>Playing as: &nbsp;{Meteor.user().username}</div>
