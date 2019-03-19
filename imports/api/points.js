@@ -14,4 +14,20 @@ Meteor.methods({
     // update user status field to be "ready"
     Users.update(Meteor.userId(), { $set: { type: "ready" } });
   }
+
+ 
+});
+
+
+Meteor.methods({
+
+
+  "user.takeRest"() {
+    // Make sure the user is logged in before inserting a task
+    if (!this.userId) {
+      throw new Meteor.Error("not-authorized");
+    }
+    // update user status field to be "ready"
+    Users.update(Meteor.userId(), { $set: { type: "rest" } });
+  }
 });
