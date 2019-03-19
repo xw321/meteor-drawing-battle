@@ -36,3 +36,7 @@ Meteor.publish("userStatus", function() {
 });
 
 // const q = new Queue();
+// TODO:
+// have a readyPlayerQueue, push ready players in it, while queue.size >=2, pop 2 players and rediect
+// them to another page to do cavas drawing
+// that page should be only accessblbe by those two players

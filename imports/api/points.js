@@ -1,6 +1,5 @@
 // work in progress, added readyPlay method for testing
 
-//import { Mongo } from "meteor/mongo";
 import { Meteor } from "meteor/meteor";
 
 export const Users = Meteor.users;
