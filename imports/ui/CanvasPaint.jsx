@@ -1,12 +1,9 @@
-// This file is still work-in-progress.
-// This file should be used when two players are playing the game
-
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 
-import { Points } from "../api/drawings.js";
+import { Points } from "../api/points.js";
 
 class CanvasPaint extends Component {
   redraw() {
@@ -46,7 +43,6 @@ class CanvasPaint extends Component {
     return (
       <div>
         <div>Playing as {Meteor.user().username}</div>
-        <br />
         <canvas
           width="400"
           height="400"

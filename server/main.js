@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import "../imports/api/points.js";
-import "../imports/api/drawings.js";
+import "../imports/api/methods.js";
 
 Meteor.startup(() => {});
 
@@ -40,3 +40,9 @@ Meteor.publish("userStatus", function() {
 // have a readyPlayerQueue, push ready players in it, while queue.size >=2, pop 2 players and rediect
 // them to another page to do cavas drawing
 // that page should be only accessblbe by those two players
+
+let user1 = Meteor.users.find({ username: "test0" });
+let user2 = Meteor.users.find({ username: "test1" });
+
+console.log("player 1: " + user1);
+console.log("player 2: " + user2);

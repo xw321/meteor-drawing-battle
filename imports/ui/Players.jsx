@@ -23,7 +23,7 @@ class Players extends Component {
     console.log("button Clicked" + JSON.stringify(Meteor.user()));
   }
 
-  takeRest(event){
+  takeRest(event) {
     Meteor.call("user.takeRest", (err, res) => {
       if (err) {
         alert("There was error , check the console");
@@ -83,6 +83,7 @@ Players.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("userData");
   Meteor.subscribe("userStatus");
+  Meteor.subscribe("userList");
   return {
     points: Meteor.users
       .find(
@@ -93,7 +94,6 @@ export default withTracker(() => {
       )
       .fetch(),
     user: Meteor.user(),
-    players: Meteor.users.find({ type: "ready" }).fetch(),
-
+    players: Meteor.users.find({ type: "ready" }).fetch()
   };
 })(Players);

@@ -27,7 +27,7 @@ const PlayComponent = () => {
         <h1>Painting Battle Play</h1>
       </div>
 
-      {<CanvasPaint />}
+      {Meteor.user() ? <CanvasPaint /> : <div>Please login to play!</div>}
     </div>
   );
 };
