@@ -7,7 +7,7 @@ Meteor.startup(() => {});
 
 Accounts.onCreateUser((options, user) => {
   user.points = 0;
-  user.type = "loggedout";
+  user.type = "rest";
   user.drawingX = [];
   user.drawingY = [];
   return user;

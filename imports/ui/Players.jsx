@@ -23,6 +23,20 @@ class Players extends Component {
     console.log("button Clicked" + JSON.stringify(Meteor.user()));
   }
 
+  takeRest(event){
+    Meteor.call("user.takeRest", (err, res) => {
+      if (err) {
+        alert("There was error , check the console");
+        console.log(err);
+        return;
+      }
+
+      console.log("change user status", res);
+    });
+    event.preventDefault();
+    console.log("button Clicked" + JSON.stringify(Meteor.user()));
+  }
+
   // test
   renderPlayers() {
     return this.props.players.map(m => (
@@ -44,6 +58,15 @@ class Players extends Component {
           onClick={this.findPlayer.bind(this)}
         >
           Play!
+        </button>
+        <br />
+        <br />
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.takeRest.bind(this)}
+        >
+          Take a rest!
         </button>
         <br />
         <div> {this.renderPlayers()}</div>
@@ -70,6 +93,7 @@ export default withTracker(() => {
       )
       .fetch(),
     user: Meteor.user(),
-    players: Meteor.users.find({ type: "ready" }).fetch()
+    players: Meteor.users.find({ type: "ready" }).fetch(),
+
   };
 })(Players);
