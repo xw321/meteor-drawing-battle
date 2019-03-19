@@ -6,7 +6,7 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 
-import { Points } from "../api/points.js";
+import { Points } from "../api/drawings.js";
 
 class CanvasPaint extends Component {
   redraw() {
