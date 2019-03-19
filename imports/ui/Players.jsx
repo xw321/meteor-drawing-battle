@@ -23,6 +23,15 @@ class Players extends Component {
     console.log("button Clicked" + JSON.stringify(Meteor.user()));
   }
 
+  // test
+  renderPlayers() {
+    return this.props.players.map(m => (
+      <div className="card" key={m._id}>
+        {m.username} : {m.type}
+      </div>
+    ));
+  }
+
   render() {
     return (
       <div>
@@ -36,17 +45,21 @@ class Players extends Component {
         >
           Play!
         </button>
+        <br />
+        <div> {this.renderPlayers()}</div>
       </div>
     );
   }
 }
 
 Players.propTypes = {
-  points: PropTypes.arrayOf(PropTypes.object).isRequired
+  points: PropTypes.arrayOf(PropTypes.object).isRequired,
+  players: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default withTracker(() => {
   Meteor.subscribe("userData");
+  Meteor.subscribe("userStatus");
   return {
     points: Meteor.users
       .find(
@@ -56,6 +69,7 @@ export default withTracker(() => {
         }
       )
       .fetch(),
-    user: Meteor.user()
+    user: Meteor.user(),
+    players: Meteor.users.find({ type: "ready" }).fetch()
   };
 })(Players);

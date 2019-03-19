@@ -7,8 +7,9 @@ Meteor.startup(() => {});
 
 Accounts.onCreateUser((options, user) => {
   user.points = 0;
-  user.status = "loggedout";
-  user.drawing = [];
+  user.type = "loggedout";
+  user.drawingX = [];
+  user.drawingY = [];
   return user;
 });
 
@@ -29,3 +30,9 @@ Meteor.publish("userData", function() {
 Meteor.publish("userList", function() {
   return Meteor.users.find({});
 });
+
+Meteor.publish("userStatus", function() {
+  return Meteor.users.find({ "status.online": true });
+});
+
+// const q = new Queue();

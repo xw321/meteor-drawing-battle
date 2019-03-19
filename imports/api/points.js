@@ -1,4 +1,4 @@
-// not useful now, will be cleaned later.
+// work in progress, added readyPlay method for testing
 
 //import { Mongo } from "meteor/mongo";
 import { Meteor } from "meteor/meteor";
@@ -11,7 +11,7 @@ Meteor.methods({
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
-
-    Users.update(Meteor.userId(), { $set: { status: "ready" } });
+    // update user status field to be "ready"
+    Users.update(Meteor.userId(), { $set: { type: "ready" } });
   }
 });
