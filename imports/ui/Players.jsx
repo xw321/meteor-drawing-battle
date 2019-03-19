@@ -70,6 +70,7 @@ class Players extends Component {
         </button>
         <br />
         <div> {this.renderPlayers()}</div>
+        
       </div>
     );
   }
