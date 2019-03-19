@@ -70,6 +70,7 @@ class Players extends Component {
         </button>
         <br />
         <div> {this.renderPlayers()}</div>
+        
       </div>
     );
   }
@@ -83,6 +84,7 @@ Players.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("userData");
   Meteor.subscribe("userStatus");
+  Meteor.subscribe("userList");
   return {
     points: Meteor.users
       .find(
