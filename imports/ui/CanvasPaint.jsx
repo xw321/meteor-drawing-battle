@@ -1,9 +1,12 @@
+/* eslint-disable no-undef */
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
-
+//import Players from "./Players.jsx";
 import { Points } from "../api/points.js";
+//import { Template } from "meteor/templating";
+//import { Session } from "meteor/session";
 
 class CanvasPaint extends Component {
   redraw() {
@@ -29,7 +32,9 @@ class CanvasPaint extends Component {
     const x = evt.clientX - this.canvas.offsetLeft,
       y = evt.clientY - this.canvas.offsetTop;
 
-    console.log("Click on ", x, y);
+    console.log(
+      "Click on " + x + " , " + y + " by user: " + Meteor.user().username
+    );
 
     // Insert in the database. Meteor will automatically redraw the component when the db changes
     Points.insert({

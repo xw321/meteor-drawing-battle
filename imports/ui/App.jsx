@@ -54,7 +54,7 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomeComponent} />
-            <Route exact path="/play" component={PlayComponent} />
+            <Route exact path="/play/" component={PlayComponent} />
             <Route exact path="/top" component={TopComponent} />
             <Route component={NotFoundPage} />
           </Switch>

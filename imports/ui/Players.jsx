@@ -5,22 +5,39 @@ import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
-// import { Status } from "../api/points.js";
+import { Redirect } from "react-router-dom";
 
 class Players extends Component {
-  findPlayer(event) {
-    //TODO
-    Meteor.call("user.readyPlay", (err, res) => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isReady: false,
+      gameID: ""
+    };
+  }
+
+  readyPlayer(event) {
+    Meteor.call("user.addToGame", Meteor.user(), (err, res) => {
       if (err) {
         alert("There was error , check the console");
         console.log(err);
         return;
       }
-
-      console.log("change user status", res);
+      console.log("add user to game, ID str is " + JSON.stringify(res));
+      if (res != undefined) {
+        this.setState({
+          gameID: JSON.stringify(res)
+        });
+      }
     });
+
+    this.setState({
+      isReady: true
+    });
+
     event.preventDefault();
-    console.log("button Clicked" + JSON.stringify(Meteor.user()));
+    //console.log("button Clicked" + JSON.stringify(Meteor.user()));
   }
 
   takeRest(event) {
@@ -47,32 +64,35 @@ class Players extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div>Playing as: &nbsp;{Meteor.user().username}</div>
-        <div>Your points: &nbsp;{Meteor.user().points}</div>
-        <br />
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.findPlayer.bind(this)}
-        >
-          Play!
-        </button>
-        <br />
-        <br />
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.takeRest.bind(this)}
-        >
-          Take a rest!
-        </button>
-        <br />
-        <div> {this.renderPlayers()}</div>
-        
-      </div>
-    );
+    if (this.state.isReady) {
+      return <Redirect to={"/play/" + this.state.gameID} />;
+    } else {
+      return (
+        <div>
+          <div>Playing as: &nbsp;{Meteor.user().username}</div>
+          <div>Your points: &nbsp;{Meteor.user().points}</div>
+          <br />
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.readyPlayer.bind(this)}
+          >
+            Play!
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.takeRest.bind(this)}
+          >
+            Take a rest!
+          </button>
+          <br />
+          <div> {this.renderPlayers()}</div>
+        </div>
+      );
+    }
   }
 }
 

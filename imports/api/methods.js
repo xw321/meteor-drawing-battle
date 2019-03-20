@@ -1,21 +1,10 @@
-// not useful now, will be used when playing feature is up
-
 // work in progress, added readyPlay method for testing
 
 import { Meteor } from "meteor/meteor";
-
+import { Games } from "./games.js";
 export const Users = Meteor.users;
 
-Meteor.methods({
-  "user.readyPlay"() {
-    // Make sure the user is logged in before inserting a task
-    if (!this.userId) {
-      throw new Meteor.Error("not-authorized");
-    }
-    // update user status field to be "ready"
-    Users.update(Meteor.userId(), { $set: { type: "ready" } });
-  }
-});
+let playerQueue = [];
 
 Meteor.methods({
   "user.takeRest"() {
@@ -23,8 +12,47 @@ Meteor.methods({
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
-    // update user status field to be "ready"
+    // update user status field to be "rest"
     Users.update(Meteor.userId(), { $set: { type: "rest" } });
+  }
+});
+
+let gameId = "";
+
+Meteor.methods({
+  "user.addToGame"(user1) {
+    console.log("add to Game is called");
+    // Make sure the user is logged in before inserting a task
+    if (!this.userId) {
+      throw new Meteor.Error("not-authorized");
+    }
+    Users.update(Meteor.userId(), { $set: { type: "ready" } });
+
+    playerQueue.push(user1);
+    console.log("playerQueue length " + playerQueue.length);
+    if (playerQueue.length >= 2) {
+      let player1 = playerQueue.shift();
+      let player2 = playerQueue.shift();
+      Users.update(player1._id, { $set: { type: "inGame" } });
+      Users.update(player2._id, { $set: { type: "inGame" } });
+
+      let gameObj = {
+        player1: player1,
+        player2: player2,
+        createdAt: Date.now()
+      };
+
+      return Games.insert(gameObj, function(err, record) {
+        if (err) return;
+        console.log("game id inside Mongo insert" + JSON.stringify(record));
+        gameId = JSON.stringify(record);
+        return gameId;
+        // Object inserted successfully.
+        //gameId = id; // this will return the id of object inserted
+      });
+    }
+
+    // console.log("before return game id " + gameId);
   }
 });
 // if (Meteor.isServer) {
