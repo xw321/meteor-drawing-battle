@@ -1,7 +1,7 @@
 // work in progress, added readyPlay method for testing
 
 import { Meteor } from "meteor/meteor";
-import { Games } from "./games.js";
+import { Games } from "../lib/games.js";
 export const Users = Meteor.users;
 
 let playerQueue = [];

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import NavBar from "./NavBar.jsx";
 import Top from "./Top.jsx";
-import CanvasPaint from "./CanvasPaint.jsx";
+//import CanvasPaint from "./CanvasPaint.jsx";
 import Players from "./Players.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 
@@ -20,17 +20,17 @@ const HomeComponent = () => {
   );
 };
 
-const PlayComponent = () => {
-  return (
-    <div>
-      <div>
-        <h1>Painting Battle Play</h1>
-      </div>
+// const PlayComponent = () => {
+//   return (
+//     <div>
+//       <div>
+//         <h1>Painting Battle Play</h1>
+//       </div>
 
-      {Meteor.user() ? <CanvasPaint /> : <div>Please login to play!</div>}
-    </div>
-  );
-};
+//       {Meteor.user() ? <CanvasPaint /> : <div>Please login to play!</div>}
+//     </div>
+//   );
+// };
 
 const TopComponent = () => (
   <div>
@@ -54,7 +54,7 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomeComponent} />
-            <Route exact path="/play/" component={PlayComponent} />
+            {/* <Route exact path="/play/" component={PlayComponent} /> */}
             <Route exact path="/top" component={TopComponent} />
             <Route component={NotFoundPage} />
           </Switch>

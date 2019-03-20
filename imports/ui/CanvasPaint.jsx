@@ -20,6 +20,7 @@ class CanvasPaint extends Component {
   }
 
   componentDidMount() {
+    Meteor.subscribe("Games");
     this.redraw();
   }
 
@@ -42,6 +43,7 @@ class CanvasPaint extends Component {
       y,
       player: Meteor.user().username
     });
+    Meteor.call("games.makeMove", x, y);
   }
 
   render() {
