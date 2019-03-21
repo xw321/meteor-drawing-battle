@@ -5,6 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
 import Counter from "./Counter.jsx";
+import peace from "../img/peace.png";
 
 function isGameEnd() {
   if (Session.get("inGame")) {
@@ -75,10 +76,13 @@ class CanvasPaint extends Component {
     Meteor.call("games.makeMove", x, y);
   }
 
+  drawImg() {}
+
   render() {
     return (
       <div>
-        <div> {"TODD: this is the given sketch"}</div>
+        <div> {this.drawImg.bind(this)}</div>
+        <img src={peace} alt="given img" />
         <br />
         <canvas
           width="400"
