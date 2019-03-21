@@ -26,12 +26,13 @@ Meteor.methods({
     let game = Games.findOne({ status: this.userId });
 
     if (game !== undefined) {
+      console.log("games.makeMove --- Find Game!!");
       gameLogic.addNewMove(x, y);
 
       if (gameLogic.checkIfGameWasWon()) {
         gameLogic.setGameResult(game._id, this.userId);
       } else {
-        if (game.movesX.length === 8) {
+        if (game.moves.length === 12) {
           gameLogic.setGameResult(game._id, "tie");
         } else {
           gameLogic.updateTurn(game);

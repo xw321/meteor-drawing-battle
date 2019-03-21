@@ -7,8 +7,7 @@ class GameLogic {
       Games.insert({
         player1: Meteor.userId(),
         player2: "",
-        moveX: [],
-        moveY: [],
+        moves: [],
         status: "waiting",
         result: ""
       });
@@ -53,6 +52,7 @@ class GameLogic {
   //   }
 
   addNewMove(x, y) {
+    console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
     Games.update(
       { status: Meteor.userId() },
       {
@@ -93,7 +93,7 @@ class GameLogic {
 
   checkIfGameWasWon() {
     const game = Games.findOne({ status: Meteor.userId() });
-    if (game.moves.length >= 10) {
+    if (game.moves.length >= 18) {
       return true;
     }
     return false;

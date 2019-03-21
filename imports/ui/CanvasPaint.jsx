@@ -3,24 +3,30 @@ import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
+import { Games } from "../lib/games.js";
 //import Players from "./Players.jsx";
-import { Points } from "../api/points.js";
+//import { Points } from "../api/points.js";
 //import { Template } from "meteor/templating";
 //import { Session } from "meteor/session";
 
 class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
-
     ctx.fillStyle = "olive";
 
-    for (const p of this.props.points) {
-      ctx.fillRect(p.x, p.y, 5, 5);
+    console.log(
+      "this game obj from props : " + JSON.stringify(this.props.game)
+    );
+    if (this.props.game.length !== 0) {
+      for (const p of this.props.game[0].moves) {
+        ctx.fillRect(p.moveX, p.moveY, 5, 5);
+      }
     }
   }
 
   componentDidMount() {
     Meteor.subscribe("Games");
+    Meteor.subscribe("MyGame");
     this.redraw();
   }
 
@@ -38,18 +44,17 @@ class CanvasPaint extends Component {
     );
 
     // Insert in the database. Meteor will automatically redraw the component when the db changes
-    Points.insert({
-      x,
-      y,
-      player: Meteor.user().username
-    });
+    // Points.insert({
+    //   x,
+    //   y,
+    //   player: Meteor.user().username
+    // });
     Meteor.call("games.makeMove", x, y);
   }
 
   render() {
     return (
       <div>
-        <div>Playing as {Meteor.user().username}</div>
         <canvas
           width="400"
           height="400"
@@ -63,11 +68,15 @@ class CanvasPaint extends Component {
 }
 
 CanvasPaint.propTypes = {
-  points: PropTypes.arrayOf(PropTypes.object).isRequired
+  game: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default withTracker(() => {
+  Meteor.subscribe("Games");
+  Meteor.subscribe("MyGame");
+
   return {
-    points: Points.find({}).fetch()
+    //Games.find({}).fetch()
+    game: Games.find({}).fetch()
   };
 })(CanvasPaint);

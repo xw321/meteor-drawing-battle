@@ -9,6 +9,24 @@ import CanvasPaint from "./CanvasPaint.jsx";
 import { Session } from "meteor/session";
 import { Games } from "../lib/games.js";
 
+function getOpponentName() {
+  if (Session.get("inGame")) {
+    console.log("in game true");
+    let myGame = Games.findOne();
+    if (myGame.status === "waiting") {
+      return "";
+    } else {
+      return myGame.player1 === Meteor.userId()
+        ? "Opponent player : " +
+            Meteor.users.find({ _id: myGame.player2 }).fetch()[0].username
+        : "Opponent player : " +
+            Meteor.users.find({ _id: myGame.player1 }).fetch()[0].username;
+    }
+  } else {
+    return "";
+  }
+}
+
 function setStatus() {
   if (Session.get("inGame")) {
     console.log("in game true");
@@ -172,9 +190,14 @@ class Players extends Component {
         <br />
         <div>Game Status : {this.props.status}</div>
         <br />
+        <div>{this.props.opponent}</div>
         <br />
         <div>
-          <CanvasPaint />
+          {this.props.status === "not played yet, what you waiting for?" ? (
+            <div>----</div>
+          ) : (
+            <CanvasPaint />
+          )}
         </div>
       </div>
     );
@@ -184,7 +207,8 @@ class Players extends Component {
 Players.propTypes = {
   points: PropTypes.arrayOf(PropTypes.object).isRequired,
   players: PropTypes.arrayOf(PropTypes.object).isRequired,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  opponent: PropTypes.string.isRequired
 };
 
 export default withTracker(() => {
@@ -203,6 +227,7 @@ export default withTracker(() => {
       .fetch(),
     user: Meteor.user(),
     players: Meteor.users.find({ type: "ready" }).fetch(),
-    status: setStatus()
+    status: setStatus(),
+    opponent: getOpponentName()
   };
 })(Players);
