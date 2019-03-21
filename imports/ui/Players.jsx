@@ -77,15 +77,15 @@ function setStatus() {
       ) {
         return "Your lost";
       } else if (myGame.result === "tie") {
-        return "tie";
+        return "...";
       } else {
         return "...";
       }
     } else {
-      return "not played yet, what you waiting for?";
+      return "not played yet, what are you waiting for?";
     }
   } else {
-    return "not played yet, what you waiting for?";
+    return "not played yet, what are you waiting for?";
   }
 }
 
