@@ -9,7 +9,8 @@ class GameLogic {
         player2: "",
         moves: [],
         status: "waiting",
-        result: ""
+        result: "",
+        gameStartAt: 0
       });
     }
   }
@@ -31,7 +32,8 @@ class GameLogic {
         {
           $set: {
             player2: Meteor.userId(),
-            status: game.player1
+            status: game.player1,
+            gameStartAt: Date.now()
           }
         }
       );
@@ -78,7 +80,8 @@ class GameLogic {
     );
   }
 
-  checkIfGameWasWon() {
+  //TODO: need to check with original sketch, and return the winner's userId
+  checkWinner() {
     const game = Games.findOne({ status: Meteor.userId() });
     if (game.moves.length >= 18) {
       return true;

@@ -9,7 +9,7 @@ class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
 
-    if (this.props.game.length !== 0) {
+    if (this.props.game !== undefined) {
       for (const p of this.props.game[0].moves) {
         if (p.playerID === Meteor.userId()) {
           ctx.fillStyle = "blue";

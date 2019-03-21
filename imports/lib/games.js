@@ -27,16 +27,15 @@ Meteor.methods({
 
     if (game !== undefined) {
       console.log("games.makeMove --- Find Game!!");
-      gameLogic.addNewMove(x, y);
-
-      if (gameLogic.checkIfGameWasWon()) {
-        gameLogic.setGameResult(game._id, this.userId);
+      let currtime = Date.now();
+      if (currtime - game.gameStartAt <= 15000) {
+        gameLogic.addNewMove(x, y);
+        gameLogic.updateTurn(game);
       } else {
-        if (game.moves.length === 12) {
-          gameLogic.setGameResult(game._id, "tie");
-        } else {
-          gameLogic.updateTurn(game);
-        }
+        // time is up, need to check who is winner
+        // winner variable is a userId
+        let winner = gameLogic.checkWinner();
+        gameLogic.setGameResult(game._id, winner);
       }
     }
   }

@@ -16,11 +16,23 @@ function getOpponentName() {
       if (myGame.status === "waiting") {
         return "";
       } else {
-        return myGame.player1 === Meteor.userId()
-          ? "Opponent player : " +
-              Meteor.users.find({ _id: myGame.player2 }).fetch()[0].username
-          : "Opponent player : " +
-              Meteor.users.find({ _id: myGame.player1 }).fetch()[0].username;
+        let prefix = "Opponent player : ";
+        let res = "";
+        if (myGame.player1 === Meteor.userId()) {
+          res =
+            Meteor.users.find({ _id: myGame.player2 }).fetch()[0] === undefined
+              ? ""
+              : prefix +
+                Meteor.users.find({ _id: myGame.player2 }).fetch()[0].username;
+        } else {
+          res =
+            Meteor.users.find({ _id: myGame.player1 }).fetch()[0] === undefined
+              ? ""
+              : prefix +
+                Meteor.users.find({ _id: myGame.player1 }).fetch()[0].username;
+        }
+
+        return res;
       }
     }
   } else {
