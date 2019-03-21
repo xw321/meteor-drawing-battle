@@ -26,15 +26,17 @@ Meteor.methods({
     let game = Games.findOne({ status: this.userId });
 
     if (game !== undefined) {
-      console.log("games.makeMove --- Find Game!!");
       let currtime = Date.now();
-      if (currtime - game.gameStartAt <= 15000) {
+      if (currtime - game.gameStartAt <= 30000) {
+        console.log("makeMove ---- still have time");
         gameLogic.addNewMove(x, y);
         gameLogic.updateTurn(game);
       } else {
         // time is up, need to check who is winner
         // winner variable is a userId
+        console.log("makeMove ---- time is up, call checkWinner()");
         let winner = gameLogic.checkWinner();
+        console.log("winner is >>>>>>>>>>>     " + winner);
         gameLogic.setGameResult(game._id, winner);
       }
     }

@@ -5,20 +5,17 @@ const rec = new Array(400);
 for (let i = 0; i < rec.length; i++) {
   rec[i] = new Array(400);
 }
-for(let i = 0; i < 400; i++){
-  for(let j = 0; j < 400; j++){
-    if((i >= 69 && i < 330) && (j >=69 && j <130)){
+for (let i = 0; i < 400; i++) {
+  for (let j = 0; j < 400; j++) {
+    if (i >= 69 && i < 330 && (j >= 69 && j < 130)) {
       rec[i][j] = 1;
-    }
-    else if((i >= 69 && i < 330) && (j >=269 && j <330)){
+    } else if (i >= 69 && i < 330 && (j >= 269 && j < 330)) {
       rec[i][j] = 1;
-    }
-    else if((i >= 69 && i < 130) && (j >=129 && j <270)){
+    } else if (i >= 69 && i < 130 && (j >= 129 && j < 270)) {
       rec[i][j] = 1;
-    }
-    else if((i >= 269 && i < 330) && (j >=129 && j <270)){
+    } else if (i >= 269 && i < 330 && (j >= 129 && j < 270)) {
       rec[i][j] = 1;
-    } else{
+    } else {
       rec[i][j] = 0;
     }
   }
@@ -64,7 +61,7 @@ class GameLogic {
   }
 
   addNewMove(x, y) {
-    console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
+    //console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
     Games.update(
       { status: Meteor.userId() },
       {
@@ -76,6 +73,7 @@ class GameLogic {
   }
 
   setGameResult(gameId, result) {
+    // set game winner and game status
     Games.update(
       { _id: gameId },
       {
@@ -85,6 +83,8 @@ class GameLogic {
         }
       }
     );
+    // increment winnter points
+    Meteor.users.update({ _id: result }, { $inc: { points: 10 } });
   }
 
   updateTurn(game) {
@@ -105,23 +105,21 @@ class GameLogic {
 
   //TODO: need to check with original sketch, and return the winner's userId
   checkWinner() {
+    console.log("check winner() is called !!");
     const game = Games.findOne({ status: Meteor.userId() });
     let pts1 = 0;
     let pts2 = 0;
-    for(let i=0; i<game.moves.length; i=i+2){
-      if(rec[game.moves.Object.moveX, game.moves.Object.moveY] ===1) pts1++;
-  
+    for (let i = 0; i < game.moves.length; i = i + 2) {
+      if (rec[(game.moves[i].moveX, game.moves[i].moveY)] === 1) pts1++;
     }
-    for(let j=1; j<game.moves.length; j=j+2){
-      if(rec[game.moves.Object.moveX, game.moves.Object.moveY] ===1) pts2++;
-
+    for (let j = 1; j < game.moves.length; j = j + 2) {
+      if (rec[(game.moves[j].moveX, game.moves[j].moveY)] === 1) pts2++;
     }
     if (pts1 >= pts2) {
       return game.player1;
-    }
-    else {
+    } else {
       return game.player2;
-    } 
+    }
   }
 
   removeGame(gameId) {

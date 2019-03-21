@@ -4,6 +4,23 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
+import Counter from "./Counter.jsx";
+
+function isGameEnd() {
+  if (Session.get("inGame")) {
+    let myGame = Games.findOne();
+
+    if (myGame !== undefined) {
+      if (myGame.status === "end") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  } else {
+    return false;
+  }
+}
 
 class CanvasPaint extends Component {
   redraw() {
@@ -36,9 +53,9 @@ class CanvasPaint extends Component {
     const x = evt.clientX - this.canvas.offsetLeft,
       y = evt.clientY - this.canvas.offsetTop;
 
-    console.log(
-      "Click on " + x + " , " + y + " by user: " + Meteor.user().username
-    );
+    // console.log(
+    //   "Click on " + x + " , " + y + " by user: " + Meteor.user().username
+    // );
 
     // Insert in the database. Meteor will automatically redraw the component when the db changes
     // Points.insert({
@@ -59,13 +76,26 @@ class CanvasPaint extends Component {
           ref={canvas => (this.canvas = canvas)}
           onClick={this.onClick.bind(this)}
         />
+        <br />
+        <div>
+          {this.props.isGameEnd ? (
+            <div>
+              <h2 className="text-center subtitle">
+                <span className="text-center">&nbsp;{"Game End!"}&nbsp;</span>
+              </h2>{" "}
+            </div>
+          ) : (
+            <Counter />
+          )}
+        </div>
       </div>
     );
   }
 }
 
 CanvasPaint.propTypes = {
-  game: PropTypes.arrayOf(PropTypes.object).isRequired
+  game: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isGameEnd: PropTypes.bool
 };
 
 export default withTracker(() => {
@@ -74,6 +104,7 @@ export default withTracker(() => {
 
   return {
     //Games.find({}).fetch()
-    game: Games.find({}).fetch()
+    game: Games.find({}).fetch(),
+    isGameEnd: isGameEnd()
   };
 })(CanvasPaint);

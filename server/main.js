@@ -4,7 +4,6 @@ import { Accounts } from "meteor/accounts-base";
 import { UserStatus } from "meteor/mizzao:user-status";
 import { gameLogic } from "../imports/lib/gameLogic.js";
 import { Games } from "../imports/lib/games.js";
-import "../imports/api/points.js";
 import "../imports/api/methods.js";
 
 Accounts.onCreateUser((options, user) => {

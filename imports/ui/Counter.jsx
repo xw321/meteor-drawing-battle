@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-let n = 15;
+let n = 30;
 
 export default class Counter extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ export default class Counter extends Component {
     if (this.state.currentCount === n - 1) {
       this.setState({ currentCount: n - 1 });
 
-      let text0 = "Time is up!";
+      let text0 = "Game End!";
       this.setState({ verb: text0 });
     } else {
       this.setState({ currentCount: this.state.currentCount + 1 });
@@ -45,9 +45,7 @@ export default class Counter extends Component {
     return (
       <div>
         <h2 className="text-center subtitle">
-          <span className="text-center subtitle2 bg-dark text-light">
-            &nbsp;{this.state.verb}&nbsp;
-          </span>
+          <span className="text-center">&nbsp;{this.state.verb}&nbsp;</span>
         </h2>{" "}
       </div>
     );

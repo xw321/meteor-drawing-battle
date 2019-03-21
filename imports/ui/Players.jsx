@@ -5,11 +5,9 @@ import PropTypes from "prop-types";
 import CanvasPaint from "./CanvasPaint.jsx";
 import { Session } from "meteor/session";
 import { Games } from "../lib/games.js";
-import Counter from "./Counter.jsx";
 
 function getOpponentName() {
   if (Session.get("inGame")) {
-    console.log("in game true");
     let myGame = Games.findOne();
 
     if (myGame !== undefined) {
@@ -42,7 +40,7 @@ function getOpponentName() {
 
 function isInGame() {
   if (Session.get("inGame")) {
-    console.log("----------in game true");
+    // console.log("----------in game true");
     let myGame = Games.findOne();
 
     if (myGame !== undefined) {
@@ -59,7 +57,7 @@ function isInGame() {
 
 function setStatus() {
   if (Session.get("inGame")) {
-    console.log("in game true");
+    // console.log("in game true");
     let myGame = Games.findOne();
 
     if (myGame !== undefined) {
@@ -104,12 +102,12 @@ class Players extends Component {
     Meteor.subscribe("Games");
   }
 
-  readyPlay(event) {
+  readyPlay() {
     Session.set("inGame", true);
     Meteor.call("games.play");
     Meteor.subscribe("MyGame");
-    console.log("on btn clik event " + event);
-    console.log("curr status " + this.state.status);
+    // console.log("on btn clik event " + event);
+    // console.log("curr status " + this.state.status);
   }
 
   render() {
@@ -137,7 +135,6 @@ class Players extends Component {
         <br />
         <div>{this.props.isInGame ? <CanvasPaint /> : <div />}</div>
         <br />
-        <div>{this.props.isInGame ? <Counter /> : <div />}</div>
       </div>
     );
   }
