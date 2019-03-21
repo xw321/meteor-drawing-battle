@@ -4,21 +4,18 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
-//import Players from "./Players.jsx";
-//import { Points } from "../api/points.js";
-//import { Template } from "meteor/templating";
-//import { Session } from "meteor/session";
 
 class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
-    ctx.fillStyle = "olive";
 
-    console.log(
-      "this game obj from props : " + JSON.stringify(this.props.game)
-    );
     if (this.props.game.length !== 0) {
       for (const p of this.props.game[0].moves) {
+        if (p.playerID === Meteor.userId()) {
+          ctx.fillStyle = "blue";
+        } else {
+          ctx.fillStyle = "red";
+        }
         ctx.fillRect(p.moveX, p.moveY, 5, 5);
       }
     }

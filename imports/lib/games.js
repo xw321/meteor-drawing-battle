@@ -10,7 +10,7 @@ Meteor.methods({
     const game = Games.findOne({ status: "waiting" });
 
     if (game === undefined) {
-      console.log("no game found, Starting a new Game");
+      console.log("no waiting game found, Starting a new Game");
       gameLogic.newGame();
     } else if (
       game !== undefined &&

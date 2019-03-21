@@ -38,19 +38,6 @@ class GameLogic {
     }
   }
 
-  //   validatePosition(position) {
-  //     for (let x = 0; x < 3; x++) {
-  //       for (let y = 0; y < 3; y++) {
-  //         if (position === x + "" + y) return true;
-  //       }
-  //     }
-
-  //     throw new Meteor.Error(
-  //       "invalid-position",
-  //       "Selected position does not exist... please stop trying to hack the game!!"
-  //     );
-  //   }
-
   addNewMove(x, y) {
     console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
     Games.update(

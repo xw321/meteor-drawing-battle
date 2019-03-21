@@ -1,5 +1,3 @@
-// work in progress, added readyPlay method for testing
-
 import { Meteor } from "meteor/meteor";
 import { Games } from "../lib/games.js";
 export const Users = Meteor.users;
@@ -47,41 +45,7 @@ Meteor.methods({
         console.log("game id inside Mongo insert" + JSON.stringify(record));
         gameId = JSON.stringify(record);
         return gameId;
-        // Object inserted successfully.
-        //gameId = id; // this will return the id of object inserted
       });
     }
-
-    // console.log("before return game id " + gameId);
   }
 });
-// if (Meteor.isServer) {
-//   Meteor.publish("drawings", function messagesPublish() {
-//     return Messages.find(
-//       {},
-//       {
-//         limit: 10,
-//         sort: {
-//           createdAt: -1
-//         }
-//       }
-//     );
-//   });
-// }
-
-// Meteor.methods({
-//   "drawings.insert"(message) {
-//     check(message, String);
-
-//     // Make sure the user is logged in before inserting a task
-//     if (!this.userId) {
-//       throw new Meteor.Error("not-authorized");
-//     }
-
-//     Messages.insert({
-//       message: message,
-//       createdAt: Date.now(),
-//       owner: Meteor.user().username
-//     });
-//   }
-// });
