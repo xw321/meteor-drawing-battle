@@ -1,6 +1,29 @@
 import { Meteor } from "meteor/meteor";
 import { Games } from "./games.js";
 
+const rec = new Array(400);
+for (let i = 0; i < rec.length; i++) {
+  rec[i] = new Array(400);
+}
+for(let i = 0; i < 400; i++){
+  for(let j = 0; j < 400; j++){
+    if((i >= 69 && i < 330) && (j >=69 && j <130)){
+      rec[i][j] = 1;
+    }
+    else if((i >= 69 && i < 330) && (j >=269 && j <330)){
+      rec[i][j] = 1;
+    }
+    else if((i >= 69 && i < 130) && (j >=129 && j <270)){
+      rec[i][j] = 1;
+    }
+    else if((i >= 269 && i < 330) && (j >=129 && j <270)){
+      rec[i][j] = 1;
+    } else{
+      rec[i][j] = 0;
+    }
+  }
+}
+
 class GameLogic {
   newGame() {
     if (!this.userIsAlreadyPlaying()) {
@@ -83,10 +106,22 @@ class GameLogic {
   //TODO: need to check with original sketch, and return the winner's userId
   checkWinner() {
     const game = Games.findOne({ status: Meteor.userId() });
-    if (game.moves.length >= 18) {
-      return true;
+    let pts1 = 0;
+    let pts2 = 0;
+    for(let i=0; i<game.moves.length; i=i+2){
+      if(rec[game.moves.Object.moveX, game.moves.Object.moveY] ===1) pts1++;
+  
     }
-    return false;
+    for(let j=1; j<game.moves.length; j=j+2){
+      if(rec[game.moves.Object.moveX, game.moves.Object.moveY] ===1) pts2++;
+
+    }
+    if (pts1 >= pts2) {
+      return game.player1;
+    }
+    else {
+      return game.player2;
+    } 
   }
 
   removeGame(gameId) {
