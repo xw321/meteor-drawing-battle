@@ -51,11 +51,38 @@ Meteor.publish("Games", function gamesPublication() {
 
 Meteor.publish("MyGame", function myGamePublication() {
   return Games.find({
-    $or: [{ player1: this.userId }, { player2: this.userId }]
+    $or: [{ player1: Meteor.userId() }, { player2: Meteor.userId() }]
   });
 });
 
 UserStatus.events.on("connectionLogout", fields => {
+  const game = Games.findOne({
+    $or: [{ player1: fields.userId }, { player2: fields.userId }]
+  });
+
+  if (game != undefined) {
+    if (game.status !== "waiting" && game.status !== "end") {
+      if (game.player1 === fields.userId) {
+        gameLogic.setGameResult(game._id, game.player2);
+        gameLogic.removePlayer(game._id, "player1");
+      } else if (game.player2 === fields.userId) {
+        gameLogic.setGameResult(game._id, game.player1);
+        gameLogic.removePlayer(game._id, "player2");
+      }
+    } else {
+      if (game.player1 === "" || game.player2 === "") {
+        gameLogic.removeGame(game._id);
+      } else {
+        if (game.player1 === fields.userId)
+          gameLogic.removePlayer(game._id, "player1");
+        else if (game.player2 === fields.userId)
+          gameLogic.removePlayer(game._id, "player2");
+      }
+    }
+  }
+});
+
+UserStatus.events.on("connectionLogin", fields => {
   const game = Games.findOne({
     $or: [{ player1: fields.userId }, { player2: fields.userId }]
   });

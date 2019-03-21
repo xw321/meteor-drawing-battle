@@ -12,7 +12,7 @@ const HomeComponent = () => {
   return (
     <div>
       <div>
-        <h1>Painting Battle</h1>
+        <h1>Drawing Battle</h1>
       </div>
 
       {Meteor.user() ? <Players /> : <div>Please login to play!</div>}

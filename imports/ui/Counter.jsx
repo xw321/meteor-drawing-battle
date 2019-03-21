@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Meteor } from "meteor/meteor";
 
 let n = 30;
 
@@ -34,6 +35,7 @@ export default class Counter extends Component {
 
       let text0 = "Game End!";
       this.setState({ verb: text0 });
+      Meteor.call("games.makeMove", -1, -1);
     } else {
       this.setState({ currentCount: this.state.currentCount + 1 });
       let text0 = (n - this.state.currentCount).toString() + "  seconds left";

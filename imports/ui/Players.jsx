@@ -40,11 +40,12 @@ function getOpponentName() {
 
 function isInGame() {
   if (Session.get("inGame")) {
-    // console.log("----------in game true");
+    //TODO findOne needs some querry
     let myGame = Games.findOne();
 
     if (myGame !== undefined) {
       if (myGame.status === "waiting") {
+        //|| myGame.status === "end"
         return false;
       } else {
         return true;
@@ -64,9 +65,9 @@ function setStatus() {
       if (myGame.status === "waiting") {
         return "Looking for an opponent...";
       } else if (myGame.status === Meteor.userId()) {
-        return "Your turn";
+        return "drawing!";
       } else if (myGame.status !== Meteor.userId() && myGame.status !== "end") {
-        return "opponent's turn";
+        return "drawing!";
       } else if (myGame.result === Meteor.userId()) {
         return "Your won";
       } else if (
@@ -129,9 +130,6 @@ class Players extends Component {
         <br />
         <div>{this.props.opponent}</div>
         <br />
-        <div>
-          {this.props.isInGame ? "this is the given sketch // TODO" : <div />}
-        </div>
         <br />
         <div>{this.props.isInGame ? <CanvasPaint /> : <div />}</div>
         <br />

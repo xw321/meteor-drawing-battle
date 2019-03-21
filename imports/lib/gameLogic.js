@@ -61,9 +61,12 @@ class GameLogic {
   }
 
   addNewMove(x, y) {
-    //console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
+    console.log("gameLogic ----new move added. X: " + x + " Y: " + y);
     Games.update(
-      { status: Meteor.userId() },
+      {
+        //status: Meteor.userId()
+        $or: [{ player1: Meteor.userId() }, { player2: Meteor.userId() }]
+      },
       {
         $push: {
           moves: { playerID: Meteor.userId(), moveX: x, moveY: y }
@@ -107,18 +110,21 @@ class GameLogic {
   checkWinner() {
     console.log("check winner() is called !!");
     const game = Games.findOne({ status: Meteor.userId() });
-    let pts1 = 0;
-    let pts2 = 0;
-    for (let i = 0; i < game.moves.length; i = i + 2) {
-      if (rec[(game.moves[i].moveX, game.moves[i].moveY)] === 1) pts1++;
-    }
-    for (let j = 1; j < game.moves.length; j = j + 2) {
-      if (rec[(game.moves[j].moveX, game.moves[j].moveY)] === 1) pts2++;
-    }
-    if (pts1 >= pts2) {
-      return game.player1;
-    } else {
-      return game.player2;
+
+    if (game !== undefined) {
+      let pts1 = 0;
+      let pts2 = 0;
+      for (let i = 0; i < game.moves.length; i = i + 2) {
+        if (rec[(game.moves[i].moveX, game.moves[i].moveY)] === 1) pts1++;
+      }
+      for (let j = 1; j < game.moves.length; j = j + 2) {
+        if (rec[(game.moves[j].moveX, game.moves[j].moveY)] === 1) pts2++;
+      }
+      if (pts1 >= pts2) {
+        return game.player1;
+      } else {
+        return game.player2;
+      }
     }
   }
 

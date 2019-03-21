@@ -7,10 +7,19 @@ export const Games = new Mongo.Collection("games");
 
 Meteor.methods({
   "games.play"() {
+    let diedgame = Games.findOne({
+      status: "end",
+      $or: [{ player1: Meteor.userId() }, { player2: Meteor.userId() }]
+    });
+    // before this player can play a new game, we need to remove exsiting game that has this player
+    if (diedgame !== undefined) {
+      gameLogic.removeGame(diedgame._id);
+    }
     const game = Games.findOne({ status: "waiting" });
 
     if (game === undefined) {
       console.log("no waiting game found, Starting a new Game");
+
       gameLogic.newGame();
     } else if (
       game !== undefined &&
@@ -23,7 +32,10 @@ Meteor.methods({
   },
 
   "games.makeMove"(x, y) {
-    let game = Games.findOne({ status: this.userId });
+    //let game = Games.findOne({ status: Meteor.userId() });
+    let game = Games.findOne({
+      $or: [{ player1: Meteor.userId() }, { player2: Meteor.userId() }]
+    });
 
     if (game !== undefined) {
       let currtime = Date.now();

@@ -26,14 +26,15 @@ class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
 
-    if (this.props.game !== undefined) {
-      for (const p of this.props.game[0].moves) {
-        if (p.playerID === Meteor.userId()) {
+    if (this.props.game !== undefined && this.props.game[0] !== undefined) {
+      let movesArr = this.props.game[0].moves;
+      for (let p = 0; p < movesArr.length; p++) {
+        if (movesArr[p].playerID === Meteor.userId()) {
           ctx.fillStyle = "blue";
         } else {
           ctx.fillStyle = "red";
         }
-        ctx.fillRect(p.moveX, p.moveY, 5, 5);
+        ctx.fillRect(movesArr[p].moveX, movesArr[p].moveY, 5, 5);
       }
     }
   }
@@ -69,6 +70,8 @@ class CanvasPaint extends Component {
   render() {
     return (
       <div>
+        <div> {"TODD: this is the given sketch"}</div>
+        <br />
         <canvas
           width="400"
           height="400"
