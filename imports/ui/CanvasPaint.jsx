@@ -5,6 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
 import Counter from "./Counter.jsx";
+import Battle from "./Battle.jsx";
 
 function isGameEnd() {
   if (Session.get("inGame")) {
@@ -91,7 +92,6 @@ class CanvasPaint extends Component {
         </div>
         <br />
         <canvas
-          className="fload-left border border-dark"
           width="400"
           height="400"
           style={{ backgroundColor: "#eee" }}
@@ -102,17 +102,17 @@ class CanvasPaint extends Component {
         <br />
         <br />
         <br />
-        {/* <div>
-          <img
-            className="floadt right border border-primary"
-            src={
-              "https://cdn.pixabay.com/photo/2013/07/18/10/58/happy-163657_1280.jpg"
-            }
-            alt="given img"
-            width="400"
-            height="400"
-          />
-        </div> */}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+          <Battle />
+        </div>
       </div>
     );
   }
