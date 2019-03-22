@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import CanvasPaint from "./CanvasPaint.jsx";
 import { Session } from "meteor/session";
 import { Games } from "../lib/games.js";
+import "../../client/main.css";
+
 
 function getOpponentName() {
   if (Session.get("inGame")) {
@@ -113,26 +115,42 @@ class Players extends Component {
 
   render() {
     return (
-      <div>
-        <div>Playing as: &nbsp;{Meteor.user().username}</div>
-        <div>Your points: &nbsp;{Meteor.user().points}</div>
-        <br />
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.readyPlay.bind(this)}
-        >
-          Play!
-        </button>
-        <br />
-        <br />
-        <div>Game Status : {this.props.status}</div>
-        <br />
-        <div>{this.props.opponent}</div>
-        <br />
-        <br />
-        <div>{this.props.isInGame ? <CanvasPaint /> : <div />}</div>
-        <br />
+      <div className="row">
+        <div className="battle1 col-6">
+          <br />
+          <div>Playing as: &nbsp;{Meteor.user().username}</div>
+          <div>Your points: &nbsp;{Meteor.user().points}</div>
+          <br />
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.readyPlay.bind(this)}
+          >
+            Play!
+          </button>
+          <br />
+          <br />
+          <div className="status">Game Status : {this.props.status}</div>
+          <br />
+          <div>{this.props.opponent}</div>
+          <br />
+        </div>
+        <div className="battle2 col-6">
+          
+          <div>{this.props.isInGame ? <CanvasPaint /> : 
+            <div className="rules">
+              <br />
+              <h3>Rules</h3>
+              <p>       There will be a sketh for you to follow with.</p>
+              <p>       Try to imitate it by drwaing on the canvas.</p>
+              <p>       The most accurate one will win the game.</p>
+              <p>       Examples:</p>
+              <br />
+              <img src={"imgs/4.png"} height = "70%" width = "70%" alt="sketch"/>
+            </div>}
+          </div>
+          <br />
+        </div>
       </div>
     );
   }

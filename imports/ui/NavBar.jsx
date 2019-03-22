@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+
+
 import { NavLink } from "react-router-dom";
 
 import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
@@ -39,7 +41,7 @@ export default class NavBar extends Component {
                   activeClassName="active"
                   to="/top"
                 >
-                  Top Players
+                  &nbsp;&nbsp;&nbsp;Top Players
                 </NavLink>
               </li>
             </ul>

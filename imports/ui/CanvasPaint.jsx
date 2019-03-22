@@ -70,7 +70,11 @@ class CanvasPaint extends Component {
   render() {
     return (
       <div>
-        <div> {"TODD: this is the given sketch"}</div>
+        <div> 
+          <br />
+          {"Imitate the sketch in the middle of the canvas"}
+          <img src={"imgs/Drawing1.png"} height = "20%" width = "20%" alt="sketch"/>
+        </div>
         <br />
         <canvas
           width="400"
