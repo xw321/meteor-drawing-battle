@@ -1,6 +1,23 @@
 import { Meteor } from "meteor/meteor";
 import { Games } from "./games.js";
 
+// function processFile(inputFile) {
+//   let fs = require("fs"),
+//     readline = require("readline"),
+//     instream = fs.createReadStream(inputFile),
+//     outstream = new (require("stream"))(),
+//     rl = readline.createInterface(instream, outstream);
+
+//   rl.on("line", function(line) {
+//     console.log(line);
+//   });
+
+//   rl.on("close", function(line) {
+//     console.log(line);
+//     console.log("done reading file.");
+//   });
+// }
+
 const rec = new Array(400);
 for (let i = 0; i < rec.length; i++) {
   rec[i] = new Array(400);
@@ -109,6 +126,7 @@ class GameLogic {
   //TODO: need to check with original sketch, and return the winner's userId
   checkWinner() {
     console.log("check winner() is called !!");
+    //processFile("../img/img-u.txt");
     const game = Games.findOne({ status: Meteor.userId() });
 
     if (game !== undefined) {

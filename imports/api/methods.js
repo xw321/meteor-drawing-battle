@@ -4,17 +4,6 @@ export const Users = Meteor.users;
 
 let playerQueue = [];
 
-Meteor.methods({
-  "user.takeRest"() {
-    // Make sure the user is logged in before inserting a task
-    if (!this.userId) {
-      throw new Meteor.Error("not-authorized");
-    }
-    // update user status field to be "rest"
-    Users.update(Meteor.userId(), { $set: { type: "rest" } });
-  }
-});
-
 let gameId = "";
 
 Meteor.methods({
