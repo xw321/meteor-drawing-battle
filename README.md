@@ -11,7 +11,8 @@ This project is made by [Xun Wang](https://xw321.github.io/) and [Yan Zhao](http
 
 ## Demo
 
-TODO: demo pic/gif, video link
+
+You can find the video demo [here](https://youtu.be/iIFxPu_nby8) TODO: demo pic/gif, video link
 
 You can play around with the [demo](https://my-drawing-battle.herokuapp.com/)
 
