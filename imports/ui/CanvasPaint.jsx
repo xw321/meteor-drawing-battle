@@ -23,6 +23,17 @@ function isGameEnd() {
   }
 }
 
+function getRandImg() {
+  let prefix = "imgs/";
+  let imgArr = ["u.png", "plane.png", "peace.png", "Drawing1.png"];
+  let game = Games.findOne();
+  let index = 0;
+  if (game !== undefined) {
+    index = game.gameStartAt % imgArr.length;
+  }
+  return prefix + imgArr[index];
+}
+
 class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
@@ -81,12 +92,21 @@ class CanvasPaint extends Component {
     return (
       <div>
         <br />
-        {"intimate the sketch in the middle of the canvas"}
-        <img src={"imgs/Drawing1.png"} height="20%" width="20%" alt="sketch" />
+        <h4 className="myfont">
+          Intimate the sketch in the middle of the canvas
+        </h4>
+        <img
+          src={this.props.myImg}
+          height="20%"
+          width="20%"
+          alt={this.props.myImg}
+        />
+        <br />
+        <br />
         <div>
           {this.props.isGameEnd ? (
             <div>
-              <h2 className="text-center subtitle">
+              <h2 className="text-center subtitle myfont text-danger bg-dark">
                 <span className="text-center">&nbsp;{"Game End!"}&nbsp;</span>
               </h2>
             </div>
@@ -106,15 +126,6 @@ class CanvasPaint extends Component {
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
     );
   }
@@ -122,7 +133,8 @@ class CanvasPaint extends Component {
 
 CanvasPaint.propTypes = {
   game: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isGameEnd: PropTypes.bool
+  isGameEnd: PropTypes.bool,
+  myImg: PropTypes.string
 };
 
 export default withTracker(() => {
@@ -132,6 +144,7 @@ export default withTracker(() => {
   return {
     //Games.find({}).fetch()
     game: Games.find({}).fetch(),
-    isGameEnd: isGameEnd()
+    isGameEnd: isGameEnd(),
+    myImg: getRandImg()
   };
 })(CanvasPaint);

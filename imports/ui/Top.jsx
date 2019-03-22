@@ -19,17 +19,21 @@ class Top extends Component {
         </div>
       </div>
       */
-      <div className="top" key={m._id}>
-        <div className="Comment  bg-white" >
+      <div className="top row mx-auto " key={m._id}>
+        <div className="col-4 mx-auto bg-white border">
+          <br />
           <span className="font-weight-bold"> 👤 </span>
           <br />
-          <span className="font-weight-bold">Name: {m.username} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Points: {m.points}</span>
           <br />
+          <span className="myfont-bold">Name: </span>
+          <span className="myfont">{m.username}</span>{" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+          <span className="myfont-bold">Points: </span>{" "}
+          <span className="myfont">{m.points}</span>
           <br />
           <br />
         </div>
       </div>
-      
     ));
   }
 

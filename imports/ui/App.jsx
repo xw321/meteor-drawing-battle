@@ -13,7 +13,7 @@ const HomeComponent = () => {
   return (
     <div className="title col-md-12">
       <div>
-        <h1>Drawing Battle</h1>
+        <h1 className="myfont"> Drawing Battle</h1>
       </div>
 
       {Meteor.user() ? (
@@ -21,18 +21,19 @@ const HomeComponent = () => {
       ) : (
         <div>
           <div className="frontText">
-            Try your drawing skills by imitating the sketch
+            <p className="myfont">
+              Try your drawing skills by imitating the sketch
+            </p>
           </div>
 
-          <p>
+          <div className="back">
             <img
               src={"imgs/6.jpeg"}
               height="85%"
               width="100%"
               alt="frontpage"
             />
-          </p>
-          <div className="frontText2">By Xun and Yan</div>
+          </div>
         </div>
       )}
     </div>
@@ -53,14 +54,14 @@ const HomeComponent = () => {
 
 const TopComponent = () => (
   <div>
-    <h2>Top Players</h2>
+    <h2 className="myfont">Top Players</h2>
     {<Top />}
   </div>
 );
 
 const NotFoundPage = () => (
   <div>
-    <h2>Opps...Page not found</h2>
+    <h2 className="myfont">Opps...Page not found</h2>
     <div />
   </div>
 );

@@ -46,7 +46,7 @@ export default class Counter extends Component {
   render() {
     return (
       <div>
-        <h2 className="text-center subtitle">
+        <h2 className="text-center subtitle myfont text-warning bg-dark">
           <span className="text-center">&nbsp;{this.state.verb}&nbsp;</span>
         </h2>{" "}
       </div>

@@ -143,6 +143,9 @@ class GameLogic {
       } else {
         return game.player2;
       }
+    } else {
+      console.log("---------check winner() game undefined");
+      return Meteor.userId();
     }
   }
 

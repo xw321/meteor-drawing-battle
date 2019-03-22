@@ -115,23 +115,30 @@ class Players extends Component {
   render() {
     return (
       <div className="row">
-        <div className="battle1 col-6">
+        <div className="col-6">
           <br />
-          <div>Playing as: &nbsp;{Meteor.user().username}</div>
-          <div>Your points: &nbsp;{Meteor.user().points}</div>
+          <div className="myfont">
+            Playing as: &nbsp;{Meteor.user().username}
+          </div>
+          <div className="myfont">
+            Your points: &nbsp;{Meteor.user().points}
+          </div>
           <br />
           <button
             type="button"
             className="btn btn-primary"
             onClick={this.readyPlay.bind(this)}
           >
-            Play!
+            <span className="myfont">Play!</span>
           </button>
           <br />
           <br />
-          <div className="status">Game Status : {this.props.status}</div>
+          <div className="myfont">
+            <span>Game Status</span> :{" "}
+            <span className="bg-warning"> {this.props.status}</span>
+          </div>
           <br />
-          <div>{this.props.opponent}</div>
+          <div className="myfont">{this.props.opponent}</div>
           <br />
         </div>
         <div className="battle2 col-6">
@@ -139,13 +146,30 @@ class Players extends Component {
             {this.props.isInGame ? (
               <CanvasPaint />
             ) : (
-              <div className="rules">
+              <div className="border rounded">
                 <br />
-                <h3>Rules</h3>
-                <p> There will be a sketh for you to follow with.</p>
-                <p> Try to imitate it by drwaing on the canvas.</p>
-                <p> The most accurate one will win the game.</p>
-                <p> Examples:</p>
+                <h3 className="myfont">How to Play</h3>
+                <p className="myfont">
+                  {" "}
+                  There will be a sketh for you to follow with.
+                </p>
+                <p className="myfont">
+                  {" "}
+                  Try to imitate it by drwaing on the canvas.
+                </p>
+                <p className="myfont">
+                  {" "}
+                  The more accurate one will win the game.
+                </p>
+                <p className="myfont">
+                  Your drawing will be in color
+                  <span className="text-primary"> blue.</span>{" "}
+                </p>
+                <p className="myfont">
+                  Your opponent drawing will be in color
+                  <span className="text-danger"> red.</span>
+                </p>
+                <p className="myfont"> Example:</p>
                 <br />
                 <img src={"imgs/4.png"} height="70%" width="70%" alt="sketch" />
               </div>

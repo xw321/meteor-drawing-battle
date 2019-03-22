@@ -33,6 +33,9 @@ Meteor.methods({
 
   "games.makeMove"(x, y) {
     //let game = Games.findOne({ status: Meteor.userId() });
+    if (x === -1 && y === -1) {
+      console.log("call by counter, time is up");
+    }
     let game = Games.findOne({
       $or: [{ player1: Meteor.userId() }, { player2: Meteor.userId() }]
     });
