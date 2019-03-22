@@ -79,28 +79,6 @@ class CanvasPaint extends Component {
     return (
       <div>
         <div>
-          <img
-            className="border border-primary"
-            id="myimg"
-            src={
-              "https://cdn.pixabay.com/photo/2013/07/18/10/58/happy-163657_1280.jpg"
-            }
-            alt="given img"
-            height="400"
-            width="400"
-          />
-        </div>
-        <br />
-        <canvas
-          className="border border-dark"
-          width="400"
-          height="400"
-          style={{ backgroundColor: "#eee" }}
-          ref={canvas => (this.canvas = canvas)}
-          onClick={this.onClick.bind(this)}
-        />
-        <br />
-        <div>
           {this.props.isGameEnd ? (
             <div>
               <h2 className="text-center subtitle">
@@ -111,6 +89,30 @@ class CanvasPaint extends Component {
             <Counter />
           )}
         </div>
+        <br />
+        <canvas
+          className="fload-left border border-dark"
+          width="400"
+          height="400"
+          style={{ backgroundColor: "#eee" }}
+          ref={canvas => (this.canvas = canvas)}
+          onClick={this.onClick.bind(this)}
+        />
+        <br />
+        <br />
+        <br />
+        <br />
+        {/* <div>
+          <img
+            className="floadt right border border-primary"
+            src={
+              "https://cdn.pixabay.com/photo/2013/07/18/10/58/happy-163657_1280.jpg"
+            }
+            alt="given img"
+            width="400"
+            height="400"
+          />
+        </div> */}
       </div>
     );
   }
