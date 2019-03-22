@@ -115,7 +115,7 @@ class Players extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-6">
+        <div className="battle1 col-6">
           <br />
           <div className="myfont">
             Playing as: &nbsp;{Meteor.user().username}
