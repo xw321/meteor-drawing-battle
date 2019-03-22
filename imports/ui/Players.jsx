@@ -7,7 +7,6 @@ import { Session } from "meteor/session";
 import { Games } from "../lib/games.js";
 import "../../client/main.css";
 
-
 function getOpponentName() {
   if (Session.get("inGame")) {
     let myGame = Games.findOne();
@@ -136,18 +135,21 @@ class Players extends Component {
           <br />
         </div>
         <div className="battle2 col-6">
-          
-          <div>{this.props.isInGame ? <CanvasPaint /> : 
-            <div className="rules">
-              <br />
-              <h3>Rules</h3>
-              <p>       There will be a sketh for you to follow with.</p>
-              <p>       Try to imitate it by drwaing on the canvas.</p>
-              <p>       The most accurate one will win the game.</p>
-              <p>       Examples:</p>
-              <br />
-              <img src={"imgs/4.png"} height = "70%" width = "70%" alt="sketch"/>
-            </div>}
+          <div className="float-left">
+            {this.props.isInGame ? (
+              <CanvasPaint />
+            ) : (
+              <div className="rules">
+                <br />
+                <h3>Rules</h3>
+                <p> There will be a sketh for you to follow with.</p>
+                <p> Try to imitate it by drwaing on the canvas.</p>
+                <p> The most accurate one will win the game.</p>
+                <p> Examples:</p>
+                <br />
+                <img src={"imgs/4.png"} height="70%" width="70%" alt="sketch" />
+              </div>
+            )}
           </div>
           <br />
         </div>

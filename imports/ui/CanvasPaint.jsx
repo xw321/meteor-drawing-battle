@@ -5,7 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
 import Counter from "./Counter.jsx";
-import Battle from "./Battle.jsx";
+//import Battle from "./Battle.jsx";
 
 function isGameEnd() {
   if (Session.get("inGame")) {
@@ -27,6 +27,7 @@ class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
 
+    if (this.props.isGameEnd) {
       ctx.clearRect(0, 0, 400, 400);
     } else {
       if (this.props.game !== undefined && this.props.game[0] !== undefined) {
@@ -77,9 +78,10 @@ class CanvasPaint extends Component {
 
   render() {
     return (
-      
-      <div> 
-
+      <div>
+        <br />
+        {"intimate the sketch in the middle of the canvas"}
+        <img src={"imgs/Drawing1.png"} height="20%" width="20%" alt="sketch" />
         <div>
           {this.props.isGameEnd ? (
             <div>
@@ -91,6 +93,18 @@ class CanvasPaint extends Component {
             <Counter />
           )}
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <br />
         <canvas
           width="400"
@@ -107,13 +121,10 @@ class CanvasPaint extends Component {
         <br />
         <br />
         <br />
+        <br />x
         <br />
         <br />
         <br />
-        <br />
-        <div>
-          <Battle />
-        </div>
       </div>
     );
   }

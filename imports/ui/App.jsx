@@ -11,28 +11,31 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const HomeComponent = () => {
   return (
-    <div div className="title" col-md-12>
+    <div className="title col-md-12">
       <div>
-        
         <h1>Drawing Battle</h1>
-        
       </div>
 
-      {Meteor.user() ? <Players /> : 
+      {Meteor.user() ? (
+        <Players />
+      ) : (
         <div>
           <div className="frontText">
-          Try your drawing skills by imitating the sketch
-          </div>
-          
-          <p><img src={"imgs/6.jpeg"} height="85%" width="100%" alt="frontpage"/></p>
-          <div className="frontText2">
-          By Xun and Yan
+            Try your drawing skills by imitating the sketch
           </div>
 
-        </div>}
-    
+          <p>
+            <img
+              src={"imgs/6.jpeg"}
+              height="85%"
+              width="100%"
+              alt="frontpage"
+            />
+          </p>
+          <div className="frontText2">By Xun and Yan</div>
+        </div>
+      )}
     </div>
-
   );
 };
 
