@@ -5,6 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Games } from "../lib/games.js";
 import Counter from "./Counter.jsx";
+import Battle from "./Battle.jsx";
 
 function isGameEnd() {
   if (Session.get("inGame")) {
@@ -26,15 +27,22 @@ class CanvasPaint extends Component {
   redraw() {
     const ctx = this.canvas.getContext("2d");
 
-    if (this.props.game !== undefined && this.props.game[0] !== undefined) {
-      let movesArr = this.props.game[0].moves;
-      for (let p = 0; p < movesArr.length; p++) {
-        if (movesArr[p].playerID === Meteor.userId()) {
-          ctx.fillStyle = "blue";
+      ctx.clearRect(0, 0, 400, 400);
+    } else {
+      if (this.props.game !== undefined && this.props.game[0] !== undefined) {
+        let movesArr = this.props.game[0].moves;
+        if (movesArr !== undefined) {
+          for (let p = 0; p < movesArr.length; p++) {
+            if (movesArr[p].playerID === Meteor.userId()) {
+              ctx.fillStyle = "blue";
+            } else {
+              ctx.fillStyle = "red";
+            }
+            ctx.fillRect(movesArr[p].moveX, movesArr[p].moveY, 5, 5);
+          }
         } else {
-          ctx.fillStyle = "red";
+          console.log("moves arr undefined!!!!");
         }
-        ctx.fillRect(movesArr[p].moveX, movesArr[p].moveY, 5, 5);
       }
     }
   }
@@ -69,11 +77,19 @@ class CanvasPaint extends Component {
 
   render() {
     return (
-      <div>
-        <div> 
-          <br />
-          {"Imitate the sketch in the middle of the canvas"}
-          <img src={"imgs/Drawing1.png"} height = "20%" width = "20%" alt="sketch"/>
+      
+      <div> 
+
+        <div>
+          {this.props.isGameEnd ? (
+            <div>
+              <h2 className="text-center subtitle">
+                <span className="text-center">&nbsp;{"Game End!"}&nbsp;</span>
+              </h2>
+            </div>
+          ) : (
+            <Counter />
+          )}
         </div>
         <br />
         <canvas
@@ -84,16 +100,19 @@ class CanvasPaint extends Component {
           onClick={this.onClick.bind(this)}
         />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div>
-          {this.props.isGameEnd ? (
-            <div>
-              <h2 className="text-center subtitle">
-                <span className="text-center">&nbsp;{"Game End!"}&nbsp;</span>
-              </h2>{" "}
-            </div>
-          ) : (
-            <Counter />
-          )}
+          <Battle />
         </div>
       </div>
     );

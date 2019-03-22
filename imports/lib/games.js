@@ -40,13 +40,13 @@ Meteor.methods({
     if (game !== undefined) {
       let currtime = Date.now();
       if (currtime - game.gameStartAt <= 30000) {
-        console.log("makeMove ---- still have time");
+        //console.log("makeMove ---- still have time");
         gameLogic.addNewMove(x, y);
         gameLogic.updateTurn(game);
       } else {
         // time is up, need to check who is winner
         // winner variable is a userId
-        console.log("makeMove ---- time is up, call checkWinner()");
+        //console.log("makeMove ---- time is up, call checkWinner()");
         let winner = gameLogic.checkWinner();
         console.log("winner is >>>>>>>>>>>     " + winner);
         gameLogic.setGameResult(game._id, winner);
