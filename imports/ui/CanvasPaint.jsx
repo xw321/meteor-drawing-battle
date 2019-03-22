@@ -59,13 +59,14 @@ class CanvasPaint extends Component {
   }
 
   onClick(evt) {
-    // Get the coords
-    const x = evt.clientX - this.canvas.offsetLeft,
-      y = evt.clientY - this.canvas.offsetTop;
+    let rect = this.canvas.getBoundingClientRect();
+    const x = evt.clientX - rect.left;
 
-    // console.log(
-    //   "Click on " + x + " , " + y + " by user: " + Meteor.user().username
-    // );
+    const y = evt.clientY - rect.top;
+
+    console.log(
+      "Click on " + x + " , " + y + " by user: " + Meteor.user().username
+    );
 
     // Insert in the database. Meteor will automatically redraw the component when the db changes
     // Points.insert({
@@ -95,17 +96,6 @@ class CanvasPaint extends Component {
         </div>
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <canvas
           width="400"
           height="400"
@@ -121,7 +111,7 @@ class CanvasPaint extends Component {
         <br />
         <br />
         <br />
-        <br />x
+        <br />
         <br />
         <br />
         <br />
