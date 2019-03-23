@@ -7,6 +7,8 @@ import { Session } from "meteor/session";
 import { Games } from "../lib/games.js";
 import "../../client/main.css";
 
+// I like the way you handled the game flow here - everything is really intuitive and well put together.
+
 function getOpponentName() {
   if (Session.get("inGame")) {
     let myGame = Games.findOne();
