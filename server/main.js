@@ -6,6 +6,8 @@ import { gameLogic } from "../imports/lib/gameLogic.js";
 import { Games } from "../imports/lib/games.js";
 import "../imports/api/methods.js";
 
+// Really smart usage of user-status to determine when to fire a game!
+
 Accounts.onCreateUser((options, user) => {
   user.points = 0;
   user.type = "rest";
