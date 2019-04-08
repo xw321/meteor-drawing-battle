@@ -33,6 +33,7 @@ Meteor.methods({
 
   "games.makeMove"(x, y) {
     //let game = Games.findOne({ status: Meteor.userId() });
+    /* Didn't check x , y . Number */
     if (x === -1 && y === -1) {
       console.log("call by counter, time is up");
     }
