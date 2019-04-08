@@ -13,6 +13,7 @@ Meteor.methods({
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
+    /* Nice way to assign game players*/
     Users.update(Meteor.userId(), { $set: { type: "ready" } });
 
     playerQueue.push(user1);
