@@ -33,7 +33,7 @@ Meteor.methods({
 
   "games.makeMove"(x, y) {
     //let game = Games.findOne({ status: Meteor.userId() });
-    /* Didn't check x , y . Number */
+    /* David - CodeReview: Didn't check x , y . Number */
     if (x === -1 && y === -1) {
       console.log("call by counter, time is up");
     }
@@ -51,6 +51,7 @@ Meteor.methods({
         // time is up, need to check who is winner
         // winner variable is a userId
         //console.log("makeMove ---- time is up, call checkWinner()");
+        /* David - CodeReview: if no player make any move, game won't terminate */
         let winner = gameLogic.checkWinner();
         console.log("winner is >>>>>>>>>>>     " + winner);
         gameLogic.setGameResult(game._id, winner);
